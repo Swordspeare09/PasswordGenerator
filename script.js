@@ -27,8 +27,8 @@ function generatePassword(){
 
         var passwordLength = prompt("Enter a number for the length of your new Password. It was to be more than 8 charcters but less than 128 characters.");
 
-        if(!Number.isNaN(passwordLength))
-        {
+        if(Number.isNaN(parseInt(passwordLength)))
+        { 
             passwordLength = "1";
         }
 
