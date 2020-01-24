@@ -19,6 +19,8 @@ generateBtn.addEventListener("click", writePassword);
 //Added Definition for generatePassword function
 function generatePassword(){
     
+
+    //These are the prompts and confrims that the user will engage with. 
     var passwordLength = prompt("Enter the length for your new Password. It was to be more than 8 charcters but less than 128 characters.");
 
     var hasSpecialChars = confirm("Do you want to include to Special Characters?");
@@ -32,7 +34,14 @@ function generatePassword(){
     //Min count for Special, upper, lower and numeric Chars.
     var minCount = 0;
 
+    //Intialized empty Min Character Variables as strings for ease of addition
 
+    var minSChar = "";
+    var minUpCase = "";
+    var minLwCase = "";
+    var minNuChar = "";
+
+    //Built array of functions to hold all the random generated charcters
     var functionArray = [
         function getSpecialChars() {
 
@@ -57,60 +66,50 @@ function generatePassword(){
 
     ]
 
-
+    //Checks for what the user chose in the prompts
     if(hasSpecialChars === true)
     {
-        var minSChar = functionArray[0]();
+        minSChar = functionArray[0]();
         minCount++;
     }
 
     if (hasUpperCase === true) {
 
-        var minUpCase = functionArray[1]();
+        minUpCase = functionArray[1]();
         minCount++;
     }
 
 
     if (hasLowerCase === true) {
 
-        var minLwCase = functionArray[2]();
+        minLwCase = functionArray[2]();
         minCount++;
     }
 
     if (hasNumbers === true) {
 
-        var minNuChar = functionArray[3]();
+        minNuChar = functionArray[3]();
         minCount++;
     }
 
 
-    for(i = 0; i < (passwordLength.length - minCount); i++)
+    //Empty Initalized string variable
+    var randPass ="";
+
+    //Loop for getting random characters
+    for (i = 0; i < (parseInt(passwordLength) - minCount); i++)
     {
+        var randPick = Math.floor(Math.random() * 4)
 
-
-
+        randPass += functionArray[randPick]();
     }
 
+    //This ensures at least one of the users chosen charcters from the prompts are added to the password
+    randPass += minLwCase;
+    randPass += minUpCase;
+    randPass += minSChar;
+    randPass += minNuChar;
 
-//Saved first draft of Random character functions
-    // function getSpecialChars() {
-
-    //     return SpecialCharArry[Math.floor(Math.random() * SpecialCharArry.length)];
-    // }
-
-    // function getUpperChars() {
-        
-    //     return String.fromCharCode(Math.floor(Math.random() * 26 + 65));
-    // }
-
-    // function getLowerChars() {
-
-    //     return String.fromCharCode(Math.floor(Math.random() * 26 + 97));
-    // }
-
-    // function getNumericChars() {
-
-    //     return String.fromCharCode(Math.floor(Math.random() * 10 + 48));
-    // }
+    return randPass;
 
 }
