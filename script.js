@@ -21,7 +21,20 @@ function generatePassword(){
     
 
     //These are the prompts and confrims that the user will engage with. 
-    var passwordLength = prompt("Enter the length for your new Password. It was to be more than 8 charcters but less than 128 characters.");
+
+    //This Do While Loop acts as user validation to prevent adding a random key input or string of charcters
+    do{
+
+        var passwordLength = prompt("Enter a number for the length of your new Password. It was to be more than 8 charcters but less than 128 characters.");
+
+        if(!Number.isNaN(passwordLength))
+        {
+            passwordLength = "1";
+        }
+
+    } while (parseInt(passwordLength) < 8 || parseInt(passwordLength) > 128);
+
+
 
     var hasSpecialChars = confirm("Do you want to include to Special Characters?");
 
