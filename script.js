@@ -56,6 +56,7 @@ function generatePassword(){
 
     //Built array of functions to hold all the random generated charcters
     var functionArray = [
+
         function getSpecialChars() {
 
             return SpecialCharArry[Math.floor(Math.random() * SpecialCharArry.length)];
@@ -110,11 +111,42 @@ function generatePassword(){
     var randPass ="";
 
     //Loop for getting random characters
-    for (i = 0; i < (parseInt(passwordLength) - minCount); i++)
+    for (var index = 0; index < (parseInt(passwordLength) - minCount); index++)
     {
         var randPick = Math.floor(Math.random() * 4)
 
-        randPass += functionArray[randPick]();
+
+        //Intialized variable in case a non included charcter is pulled from function array
+        var checkMinReq = "";
+
+
+        //Checks to see if a non included charcter has been pulled from function array
+        //If so, the index is reduced to prevent loss of total charcters in generated password
+        if(randPick === 0 && hasSpecialChars === false)
+        {
+
+            randPass += checkMinReq;
+            index--; 
+        } else if (randPick === 1 && hasUpperCase === false) 
+        {
+
+            randPass += checkMinReq;
+            index--;
+        } else if (randPick === 2 && hasLowerCase === false) 
+        {
+
+            randPass += checkMinReq;
+            index--;
+        } else if (randPick === 3 && hasNumbers === false) 
+        {
+
+            randPass += checkMinReq;
+            index--;
+        }else
+        {
+            randPass += functionArray[randPick]();          //This statement inserts random characters into first half of teh array.
+        }
+        
     }
 
     //This ensures at least one of the users chosen charcters from the prompts are added to the password
